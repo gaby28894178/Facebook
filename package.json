@@ -1,0 +1,13 @@
+{
+  "name": "facebook-form-capture",
+  "version": "1.0.0",
+  "description": "Captura automática de datos del formulario de Facebook",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "dev": "node main.js"
+  },
+  "keywords": ["facebook", "form", "capture", "datos"],
+  "author": "",
+  "license": "ISC"
+}

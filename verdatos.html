@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos Guardados - Facebook</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #1c1e21;
+            padding: 20px;
+        }
+        
+        .header {
+            background-color: #1877f2;
+            padding: 16px 0;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #1877f2;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+        
+        .txt-content {
+            background-color: #f7f8fa;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            padding: 20px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-download {
+            background-color: #1877f2;
+            color: white;
+        }
+        
+        .btn-download:hover {
+            background-color: #166fe5;
+        }
+        
+        .btn-clear {
+            background-color: #f02849;
+            color: white;
+        }
+        
+        .btn-clear:hover {
+            background-color: #d92b47;
+        }
+        
+        .btn-back {
+            background-color: #42b72a;
+            color: white;
+        }
+        
+        .btn-back:hover {
+            background-color: #36a420;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #737373;
+            font-size: 14px;
+        }
+        
+        .empty-message {
+            text-align: center;
+            color: #65676b;
+            font-style: italic;
+            padding: 30px;
+        }
+        
+        @media (max-width: 600px) {
+            .actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">facebook</div>
+    </div>
+    
+    <div class="container">
+        <h1>Contenido de datos.txt</h1>
+        
+        <div id="txtContent" class="txt-content">
+            <!-- El contenido del archivo TXT se cargará aquí -->
+        </div>
+        
+        <div class="actions">
+            <button id="downloadBtn" class="btn btn-download">Descargar datos.txt</button>
+            <button id="clearBtn" class="btn btn-clear">Borrar datos</button>
+            <button id="backBtn" class="btn btn-back">Volver al Login</button>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Facebook clone © 2023 - Datos simulados con fines educativos</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const txtContent = document.getElementById('txtContent');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const backBtn = document.getElementById('backBtn');
+            
+            // Cargar datos desde localStorage
+            function loadData() {
+                const credentialsData = localStorage.getItem('facebookCredentials');
+                
+                if (credentialsData) {
+                    txtContent.textContent = credentialsData;
+                } else {
+                    txtContent.innerHTML = '<div class="empty-message">No hay datos guardados. Los datos aparecerán aquí después de intentos de inicio de sesión.</div>';
+                    downloadBtn.disabled = true;
+                    clearBtn.disabled = true;
+                }
+            }
+            
+            // Descargar como archivo TXT
+            downloadBtn.addEventListener('click', function() {
+                const credentialsData = localStorage.getItem('facebookCredentials');
+                
+                if (credentialsData) {
+                    const blob = new Blob([credentialsData], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'datos.txt';
+                    document.body.appendChild(a);
+                    a.click();
+                    
+                    // Limpiar
+                    setTimeout(() => {
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                    }, 100);
+                }
+            });
+            
+            // Borrar datos
+            clearBtn.addEventListener('click', function() {
+                if (confirm('¿Estás seguro de que quieres borrar todos los datos guardados?')) {
+                    localStorage.removeItem('facebookCredentials');
+                    loadData();
+                    alert('Datos borrados correctamente.');
+                }
+            });
+            
+            // Volver al login
+            backBtn.addEventListener('click', function() {
+                window.location.href = 'index.html'; // Cambia por la URL de tu página de login
+            });
+            
+            // Inicializar la carga de datos
+            loadData();
+        });
+    </script>
+</body>
+</html>
